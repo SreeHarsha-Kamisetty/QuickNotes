@@ -40,7 +40,7 @@ UserRouter.post("/login",async (req,res)=>{
             }
             else{
                 
-                res.status(200).json({Message:"Invalid Credentials"})
+                res.status(400).json({Message:"Invalid Credentials"})
             }
         })
     }
