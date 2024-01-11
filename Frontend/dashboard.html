@@ -132,7 +132,7 @@
     heading.innerText = `Welcome ${username}`;
     async function loadNotes() {
         try {
-            let res = await fetch("http://localhost:8080/notes", {
+            let res = await fetch("https://notesapi-jpgf.onrender.com/notes", {
                 headers: {
                     "Content-type": "application/json",
                     authorization: `Bearer ${localStorage.getItem("token")}`
@@ -177,7 +177,7 @@
             // saveBtn.addEventListener("click",async()=>{
             //     console.log(noteID);
             //     try {
-            //         let res = await fetch(`http://localhost:8080/notes/update/${noteID}`,{
+            //         let res = await fetch(`https://notesapi-jpgf.onrender.com/notes/update/${noteID}`,{
             //             method:"PATCH",
             //             headers: {
             //         "Content-type": "application/json",
@@ -222,7 +222,7 @@
         saveBtn.addEventListener("click", async () => {
             console.log(noteID);
             try {
-                let res = await fetch(`http://localhost:8080/notes/update/${noteID}`, {
+                let res = await fetch(`https://notesapi-jpgf.onrender.com/notes/update/${noteID}`, {
                     method: "PATCH",
                     headers: {
                         "Content-type": "application/json",
@@ -249,7 +249,7 @@
     }
     async function DeleteNote(id) {
         try {
-            let res = await fetch(`http://localhost:8080/notes/delete/${id}`, {
+            let res = await fetch(`https://notesapi-jpgf.onrender.com/notes/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-type": "application/json",
@@ -277,7 +277,7 @@
     })
     async function NewNote(body) {
         try {
-            let res = await fetch(`http://localhost:8080/notes/create`, {
+            let res = await fetch(`https://notesapi-jpgf.onrender.com/notes/create`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

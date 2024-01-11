@@ -27,7 +27,7 @@ let validator = document.getElementById("validator");
 login.addEventListener('click',async()=>{
     try {
         let payload = {"email":email.value,"password":password.value}
-        let res = await fetch("http://localhost:8080/users/login",{
+        let res = await fetch("https://notesapi-jpgf.onrender.com/users/login",{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
