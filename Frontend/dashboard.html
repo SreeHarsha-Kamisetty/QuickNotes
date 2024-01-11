@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <style> nav{
-        display: flex;
-        justify-content: center;
-        gap: 10%;
-        padding: 2%;
-    }
-    nav>div{
-        display: flex;
-        justify-content: center;
-        gap: 10%;
-    }
-    #heading{
-        text-align: center;
-        padding: 2%;
-    }
-    #container{
-        width: max-content;
-        
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .note{
-        width: 80%;
-        margin:5%;
-        border: 5px solid black;
-        border-radius: 10px;
-        padding: 10px;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <style>
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 10%;
+            padding: 2%;
+        }
+
+        nav>div {
+            display: flex;
+            justify-content: center;
+            gap: 10%;
+        }
+
+        #heading {
+            text-align: center;
+            padding: 2%;
+        }
+
+        #container {
+            width: max-content;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .note {
+            width: 80%;
+            margin: 5%;
+            border: 5px solid black;
+            border-radius: 10px;
+            padding: 10px;
+        }
     </style>
 </head>
 
 <body>
     <h1 id="heading">Welcome to QuickNotes</h1>
     <nav>
-        <div >
+        <div>
             <a href="./index.html"><button>Home</button></a>
-        <a href="./dashboard.html">Dashboard</a>
+            <a href="./dashboard.html">Dashboard</a>
         </div>
         <div>
             <a href="./login.html"><button id="login">Login</button></a>
             <a href="./register.html"><button id="signup">SignUp</button></a>
-        
+
         </div>
     </nav>
 
@@ -57,59 +68,165 @@
             <button id="edit">Edit</button>
             <button id="delete">Delete</button>
         </div> -->
-      
+
     </div>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#example">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h2 >Title</h2>
+            <input type="text" placeholder="title" id="edit-title">
+            <!-- <p>This is the body of the notes where all the content goes</p> -->
+            <h2>Body</h2>
+            <input type="text" id="edit-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="save">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script>
     let username = localStorage.getItem("username");
     let heading = document.getElementById("heading");
     let container = document.getElementById("container");
     heading.innerText = `Welcome ${username}`;
-    async function loadNotes(){
+    async function loadNotes() {
         try {
-            let res  = await fetch("http://localhost:8080/notes",{
-                headers:{
-                    "Content-type":"application/json",
-                    authorization:`Bearer ${localStorage.getItem("token")}`
+            let res = await fetch("http://localhost:8080/notes", {
+                headers: {
+                    "Content-type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
             let data = await res.json();
             console.log(data);
-            data.Notes.forEach(item=>{
+            data.Notes.forEach(item => {
                 let cards = createNote(item);
                 container.append(cards);
             })
         } catch (error) {
-            
+
         }
     }
     loadNotes();
 
-    function createNote(sample){
+    function createNote(sample) {
         let card = document.createElement("div");
         card.className = "note"
+        
         let title = document.createElement("h2");
         title.innerText = sample.title
+        title.setAttribute("id", "title");
         let body = document.createElement("p");
         body.innerText = sample.body
+        body.setAttribute("id", "body");
         let edit = document.createElement("button");
         edit.innerText = "Edit";
+        edit.setAttribute("id", "edit")
+        edit.setAttribute("data-bs-toggle","modal")
+        edit.setAttribute("data-bs-target","#example");
+        edit.dataset.id=sample._id
+        edit.addEventListener("click", () => {
+            EditNote(edit.dataset.id);
+
+            // let modalTitle = document.getElementById("edit-title");
+            // let modalBody = document.getElementById("edit-body")
+            // let saveBtn = document.getElementById("save");
+            // let note = document.getElementById("")
+            // let noteID = edit.dataset.id
+            // saveBtn.addEventListener("click",async()=>{
+            //     console.log(noteID);
+            //     try {
+            //         let res = await fetch(`http://localhost:8080/notes/update/${noteID}`,{
+            //             method:"PATCH",
+            //             headers: {
+            //         "Content-type": "application/json",
+            //         authorization: `Bearer ${localStorage.getItem("token")}`
+            //             },
+            //             body:JSON.stringify({
+            //                 "title":modalTitle.value,
+            //                 "body":modalBody.value
+            //             })
+            //         })
+            //         let data = await res.json();
+            //         console.log(data);
+            //         container.innerHTML=""
+            //         modalBody.innerText=""
+            //         modalTitle.innerText=""
+            //         loadNotes();
+            //     } catch (error) {
+            //         console.log(error);
+            //     }
+                
+            // })
+           
+        })
         let del = document.createElement("button")
-        del.dataset.id=sample._id;
+        del.dataset.id = sample._id;
         del.innerText = "Delete";
-        del.addEventListener("click",()=>{
+        del.setAttribute("id", "delete");
+        del.addEventListener("click", () => {
             DeleteNote(del.dataset.id);
         })
-        card.append(title,body,edit,del);
+        card.append(title, body, edit, del);
         return card
     }
-    async function DeleteNote(id){
+
+    function EditNote(noteID) {
+        
+        let modalTitle = document.getElementById("edit-title");
+            let modalBody = document.getElementById("edit-body")
+            let saveBtn = document.getElementById("save");
+            // let note = document.getElementById("")
+            // let noteID = edit.dataset.id
+            saveBtn.addEventListener("click",async()=>{
+                console.log(noteID);
+                try {
+                    let res = await fetch(`http://localhost:8080/notes/update/${noteID}`,{
+                        method:"PATCH",
+                        headers: {
+                    "Content-type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem("token")}`
+                        },
+                        body:JSON.stringify({
+                            "title":modalTitle.value,
+                            "body":modalBody.value
+                        })
+                    })
+                    let data = await res.json();
+                    console.log(data);
+                    container.innerHTML=""
+                    modalBody.innerText=""
+                    modalTitle.innerText=""
+                    loadNotes();
+                } catch (error) {
+                    console.log(error);
+                }
+                
+            })
+           
+
+    }
+    async function DeleteNote(id) {
         try {
-            let res = await fetch(`http://localhost:8080/notes/delete/${id}`,{
-                method:"DELETE",
-                headers:{
-                    "Content-type":"application/json",
-                    authorization:`Bearer ${localStorage.getItem("token")}`
+            let res = await fetch(`http://localhost:8080/notes/delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
             let data = await res.json();
@@ -121,4 +238,5 @@
         }
     }
 </script>
+
 </html>
