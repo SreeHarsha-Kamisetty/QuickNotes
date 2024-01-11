@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style> nav{
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+        padding: 2%;
+    }
+    nav>div{
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+    }
+    #heading{
+        text-align: center;
+        padding: 2%;
+    }
+    #container{
+        margin:10%;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    </style>
+</head>
+
+<body>
+    <h1 id="heading">Welcome to QuickNotes</h1>
+    <nav>
+        <div >
+            <a href="./index.html"><button>Home</button></a>
+        <a href="./dashboard.html">Dashboard</a>
+        </div>
+        <div>
+            <a href="./login.html"><button id="login">Login</button></a>
+            <a href="./register.html"><button id="signup">SignUp</button></a>
+        
+        </div>
+    </nav>
+
+    <div id="container">
+        <div class="note">
+            <h2>Title</h2>
+            <p>This is the body of the notes where all the content goes</p>
+            <button id="edit">Edit</button>
+            <button id="delete">Delete</button>
+        </div>
+      
+    </div>
+</body>
+<script>
+    let username = localStorage.getItem("username");
+    let heading = document.getElementById("heading");
+    heading.innerText = `Welcome ${username}`;
+    async function loadNotes(){
+        try {
+            let res  = await fetch("http://localhost:8080/notes",{
+                headers:{
+                    "Content-type":"application/json",
+                    authorization:`Bearer ${localStorage.getItem("token")}`
+                }
+            })
+            let data = await res.json();
+            console.log(data);
+        } catch (error) {
+            
+        }
+    }
+</script>
+</html>

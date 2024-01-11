@@ -36,7 +36,7 @@ UserRouter.post("/login",async (req,res)=>{
                 let token_payload = {userID:user._id,username:user.username};
                 let secret_key = process.env.secret_key
                 let token = jwt.sign(token_payload,secret_key);
-                res.status(200).json({Message:"login succcessful",access_token:token});
+                res.status(200).json({Message:"login succcessful",token,user});
             }
             else{
                 

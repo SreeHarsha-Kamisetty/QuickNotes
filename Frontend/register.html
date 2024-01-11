@@ -9,20 +9,45 @@
     <div>
         <h1>Register Here </h1>
         <label for="">Username</label>
-        <input type="text" name="" id="">
+        <input type="text" name="username" id="username">
         <label for="">Email</label>
-        <input type="text">
+        <input type="text" id="email">
         <label for="">Password</label>
-        <input type="password">
+        <input type="password" id="password">
         <button id="signup">Sign up</button>
     </div>
 </body>
 <script>
+    let username = document.getElementById("username");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
     let signup = document.getElementById("signup");
 
 
-    signup.addEventListener('click',()=>{
-        console.log("click")
+    signup.addEventListener('click',async()=>{
+        let payload={
+            "email":email.value,
+            "username":username.value,
+            "password":password.value
+        }
+        console.log(payload)
+        try {
+            let res =await fetch("https://notesapi-jpgf.onrender.com/users/login",{
+                method:"POST",
+                headers:{
+                    "Content-type":"application/json"
+                },
+                body:JSON.stringify(payload)
+            })
+            if(res.status ==200){
+                let data = await res.json();
+                console.log(data);
+                window.location.href ="./login.html"
+            }
+            
+        } catch (error) {
+            console.log(error)
+        }
     })
 
 </script>
