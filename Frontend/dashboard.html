@@ -22,12 +22,13 @@
         <div>
             <a href="./index.html"><button>Home</button></a>
             <a href="./dashboard.html">Dashboard</a>
+            <a href="">Logout</a>
         </div>
-        <div>
+        <!-- <div>
             <a href="./login.html"><button id="login">Login</button></a>
             <a href="./register.html"><button id="signup">SignUp</button></a>
 
-        </div>
+        </div> -->
     </nav>
 
     <!--Test div for the notes-->
@@ -52,15 +53,7 @@
         </div> -->
     </div>
 
-    <!-- <div id="container">
-        <!-- <div class="note">
-            <h2>Title</h2>
-            <p>This is the body of the notes where all the content goes</p>
-            <button id="edit">Edit</button>
-            <button id="delete">Delete</button>
-        </div> -->
 
-    </div> -->
     <!-- Button trigger modal -->
     <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#example">
     Launch demo modal
@@ -71,7 +64,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit your Notes</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -98,7 +91,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Your Note here</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -161,38 +154,11 @@
         edit.setAttribute("class", "btn btn-primary")
         edit.dataset.id = sample._id
         edit.addEventListener("click", () => {
-            EditNote(edit.dataset.id);
+            // console.log(sample.title)
+            // console.log(sample.body)
+            EditNote(edit.dataset.id,sample.title,sample.body);
 
-            // let modalTitle = document.getElementById("edit-title");
-            // let modalBody = document.getElementById("edit-body")
-            // let saveBtn = document.getElementById("save");
-            // let note = document.getElementById("")
-            // let noteID = edit.dataset.id
-            // saveBtn.addEventListener("click",async()=>{
-            //     console.log(noteID);
-            //     try {
-            //         let res = await fetch(`https://notesapi-jpgf.onrender.com/notes/update/${noteID}`,{
-            //             method:"PATCH",
-            //             headers: {
-            //         "Content-type": "application/json",
-            //         authorization: `Bearer ${localStorage.getItem("token")}`
-            //             },
-            //             body:JSON.stringify({
-            //                 "title":modalTitle.value,
-            //                 "body":modalBody.value
-            //             })
-            //         })
-            //         let data = await res.json();
-            //         console.log(data);
-            //         container.innerHTML=""
-            //         modalBody.innerText=""
-            //         modalTitle.innerText=""
-            //         loadNotes();
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
-
-            // })
+           
 
         })
         let del = document.createElement("button")
@@ -208,10 +174,12 @@
         return card
     }
 
-    function EditNote(noteID) {
-
+    function EditNote(noteID,title,body) {
+        console.log(body,title)
         let modalTitle = document.getElementById("edit-title");
         let modalBody = document.getElementById("edit-body")
+        modalTitle.value=title
+        modalBody.value=body
         let saveBtn = document.getElementById("save");
         // let note = document.getElementById("")
         // let noteID = edit.dataset.id
