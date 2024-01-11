@@ -27,7 +27,7 @@ let validator = document.getElementById("validator");
 login.addEventListener('click',async()=>{
     try {
         let payload = {"email":email.value,"password":password.value}
-        let res = await fetch("https://notesapi-jpgf.onrender.com/users/login",{
+        let res = await fetch("http://localhost:8080/users/login",{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
@@ -42,7 +42,7 @@ login.addEventListener('click',async()=>{
             validator.style.color="green";
             validator.textContent = "Credentials Verified. Redirecting you to Dashboard......";
             setInterval(()=>{
-                window.location.href="./register.html";
+                window.location.href="./dashboard.html";
             },3000)
             
         }

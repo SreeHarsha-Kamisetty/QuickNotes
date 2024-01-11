@@ -20,11 +20,18 @@
         padding: 2%;
     }
     #container{
-        margin:10%;
-        width: 60%;
+        width: max-content;
+        
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .note{
+        width: 80%;
+        margin:5%;
+        border: 5px solid black;
+        border-radius: 10px;
+        padding: 10px;
     }
     </style>
 </head>
@@ -44,18 +51,19 @@
     </nav>
 
     <div id="container">
-        <div class="note">
+        <!-- <div class="note">
             <h2>Title</h2>
             <p>This is the body of the notes where all the content goes</p>
             <button id="edit">Edit</button>
             <button id="delete">Delete</button>
-        </div>
+        </div> -->
       
     </div>
 </body>
 <script>
     let username = localStorage.getItem("username");
     let heading = document.getElementById("heading");
+    let container = document.getElementById("container");
     heading.innerText = `Welcome ${username}`;
     async function loadNotes(){
         try {
@@ -67,8 +75,49 @@
             })
             let data = await res.json();
             console.log(data);
+            data.Notes.forEach(item=>{
+                let cards = createNote(item);
+                container.append(cards);
+            })
         } catch (error) {
             
+        }
+    }
+    loadNotes();
+
+    function createNote(sample){
+        let card = document.createElement("div");
+        card.className = "note"
+        let title = document.createElement("h2");
+        title.innerText = sample.title
+        let body = document.createElement("p");
+        body.innerText = sample.body
+        let edit = document.createElement("button");
+        edit.innerText = "Edit";
+        let del = document.createElement("button")
+        del.dataset.id=sample._id;
+        del.innerText = "Delete";
+        del.addEventListener("click",()=>{
+            DeleteNote(del.dataset.id);
+        })
+        card.append(title,body,edit,del);
+        return card
+    }
+    async function DeleteNote(id){
+        try {
+            let res = await fetch(`http://localhost:8080/notes/delete/${id}`,{
+                method:"DELETE",
+                headers:{
+                    "Content-type":"application/json",
+                    authorization:`Bearer ${localStorage.getItem("token")}`
+                }
+            })
+            let data = await res.json();
+            console.log(data);
+            container.innerHTML = "";
+            loadNotes();
+        } catch (error) {
+            console.log(error);
         }
     }
 </script>
