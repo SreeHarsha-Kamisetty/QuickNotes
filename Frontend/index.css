@@ -1,0 +1,31 @@
+ /* button{
+        padding: 10%;
+        text-align: center;
+        margin: auto;
+        background-color: #864AF9;
+        color: #332941;
+        border: 20%;
+        border-radius: 20%;
+        height: 4rem;
+       
+    } */
+    /* button:hover{
+        background-color: #7FC7D9;
+        color: #DCF2F1;
+    } */
+    nav{
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+        padding: 2%;
+    }
+    nav>div{
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+    }
+    #heading{
+        text-align: center;
+        padding: 2%;
+    }
+   
