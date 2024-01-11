@@ -71,32 +71,59 @@
 
     </div>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#example">
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#example">
     Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </button> -->
+
+    <!-- Modal for Edit Notes -->
+    <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2>Title</h2>
+                    <input type="text" placeholder="title" id="edit-title">
+                    <!-- <p>This is the body of the notes where all the content goes</p> -->
+                    <h2>Body</h2>
+                    <input type="text" id="edit-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save">Save changes</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <h2 >Title</h2>
-            <input type="text" placeholder="title" id="edit-title">
-            <!-- <p>This is the body of the notes where all the content goes</p> -->
-            <h2>Body</h2>
-            <input type="text" id="edit-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="save">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <!--Button for adding notes-->
+ <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-note">
+    Add New Notes
+  </button>
+    <!--Modal for Adding Notes-->
+    <div class="modal fade" id="create-note" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2>Title</h2>
+                    <input type="text" placeholder="title" id="create-title">
+                    <!-- <p>This is the body of the notes where all the content goes</p> -->
+                    <h2>Body</h2>
+                    <input type="text" id="create-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="create">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     let username = localStorage.getItem("username");
@@ -126,7 +153,7 @@
     function createNote(sample) {
         let card = document.createElement("div");
         card.className = "note"
-        
+
         let title = document.createElement("h2");
         title.innerText = sample.title
         title.setAttribute("id", "title");
@@ -136,9 +163,9 @@
         let edit = document.createElement("button");
         edit.innerText = "Edit";
         edit.setAttribute("id", "edit")
-        edit.setAttribute("data-bs-toggle","modal")
-        edit.setAttribute("data-bs-target","#example");
-        edit.dataset.id=sample._id
+        edit.setAttribute("data-bs-toggle", "modal")
+        edit.setAttribute("data-bs-target", "#example");
+        edit.dataset.id = sample._id
         edit.addEventListener("click", () => {
             EditNote(edit.dataset.id);
 
@@ -170,9 +197,9 @@
             //     } catch (error) {
             //         console.log(error);
             //     }
-                
+
             // })
-           
+
         })
         let del = document.createElement("button")
         del.dataset.id = sample._id;
@@ -186,38 +213,38 @@
     }
 
     function EditNote(noteID) {
-        
+
         let modalTitle = document.getElementById("edit-title");
-            let modalBody = document.getElementById("edit-body")
-            let saveBtn = document.getElementById("save");
-            // let note = document.getElementById("")
-            // let noteID = edit.dataset.id
-            saveBtn.addEventListener("click",async()=>{
-                console.log(noteID);
-                try {
-                    let res = await fetch(`http://localhost:8080/notes/update/${noteID}`,{
-                        method:"PATCH",
-                        headers: {
-                    "Content-type": "application/json",
-                    authorization: `Bearer ${localStorage.getItem("token")}`
-                        },
-                        body:JSON.stringify({
-                            "title":modalTitle.value,
-                            "body":modalBody.value
-                        })
+        let modalBody = document.getElementById("edit-body")
+        let saveBtn = document.getElementById("save");
+        // let note = document.getElementById("")
+        // let noteID = edit.dataset.id
+        saveBtn.addEventListener("click", async () => {
+            console.log(noteID);
+            try {
+                let res = await fetch(`http://localhost:8080/notes/update/${noteID}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: JSON.stringify({
+                        "title": modalTitle.value,
+                        "body": modalBody.value
                     })
-                    let data = await res.json();
-                    console.log(data);
-                    container.innerHTML=""
-                    modalBody.innerText=""
-                    modalTitle.innerText=""
-                    loadNotes();
-                } catch (error) {
-                    console.log(error);
-                }
-                
-            })
-           
+                })
+                let data = await res.json();
+                console.log(data);
+                container.innerHTML = ""
+                modalBody.innerText = ""
+                modalTitle.innerText = ""
+                loadNotes();
+            } catch (error) {
+                console.log(error);
+            }
+
+        })
+
 
     }
     async function DeleteNote(id) {
@@ -232,6 +259,35 @@
             let data = await res.json();
             console.log(data);
             container.innerHTML = "";
+            loadNotes();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    let create = document.getElementById("create");
+    create.addEventListener("click",()=>{
+        let createTitle = document.getElementById("create-title");
+        let createBody = document.getElementById("create-body");
+        let body={
+            "title":createTitle.value,
+            "body":createBody.value
+        }
+        NewNote(body);
+    })
+    async function NewNote(body) {
+        try {
+            let res = await fetch(`http://localhost:8080/notes/create`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify(body)
+            })
+            let data = await res.json();
+            console.log(data);
+            container.innerHTML=""
             loadNotes();
         } catch (error) {
             console.log(error);
