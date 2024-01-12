@@ -16,7 +16,7 @@ body{
 }
 
 #main input{
-    width: auto;
+    width: 70%;
     margin: 2%;
     height: 5%;
     padding: 2%;
@@ -24,7 +24,7 @@ body{
 }
 #main button{
     padding: 1%;
-    width: 15%;
+    width: 60%;
     background-color: white;
     margin-top: 5%;
     border: 1px solid black;
@@ -35,4 +35,10 @@ body{
     color: black;
     background-color: yellow;
     
+}
+@media screen and (max-width: 600px) {
+    #main{
+        width: 80%;
+        margin:10% auto;
+    }
 }
