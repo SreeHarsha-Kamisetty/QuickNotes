@@ -11,6 +11,8 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
         <link rel="stylesheet" href="dashboard.css">
+       
+
     <style>
        
     </style>
@@ -19,8 +21,8 @@
 <body>
     <h1 id="heading">Welcome to QuickNotes</h1>
     <nav>
-        <div>
-            <a href="./index.html"><button>Home</button></a>
+        <div id="top">
+            <a href="./index.html">Home</a>
             <a href="./dashboard.html">Dashboard</a>
             <a href="">Logout</a>
         </div>
@@ -83,9 +85,12 @@
     </div>
 
     <!--Button for adding notes-->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-note">
-        Add New Notes
-    </button>
+    <div id="bottom">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-note">
+             Create new note
+        </button>
+    </div>
+   
     <!--Modal for Adding Notes-->
     <div class="modal fade" id="create-note" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

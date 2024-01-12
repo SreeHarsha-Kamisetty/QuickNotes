@@ -1,24 +1,28 @@
-/* body{
-    background-image: url(https://www.murdoch.edu.au/sf-images/newsportallibrary/feature-images/note-taking-feature.jpg?sfvrsn=ff31cf5f_0);
+body{
+    /* background-image: url(https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg?size=626&ext=jpg&ga=GA1.1.1412446893.1704931200&semt=ais); */
     background-repeat: no-repeat;
-    background-size: cover;
-} */
+   background-color: black;
+   background-size: cover; 
+   background-position: center;
+}
 nav {
     display: flex;
     justify-content: center;
     gap: 10%;
-    padding: 2%;
+    
 }
 
 nav>div {
     display: flex;
     justify-content: center;
     gap: 10%;
+   
 }
 
 #heading {
     text-align: center;
     padding: 2%;
+    color: white;
 }
 
 #container {
@@ -26,7 +30,8 @@ nav>div {
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    
 }
 
 .note {
@@ -38,14 +43,46 @@ nav>div {
 }
 
 .card {
-    width: 60%;
+    width: 50%;
     margin-top: 10%;
-    margin-left: 20%;
-    margin-right: 20%;
-    border: 2px solid black;
+    margin-left: 25%;
+    margin-right: 25%;
+    border: 12px solid black;
     padding: 10px;
+    text-align: center;
+    /* border-style: dashed; */
+    /* box-shadow: rgba(8, 149, 188, 0.3) 0px 0px 0px 3px; */
+     box-shadow: turquoise 0px 0px 0px 3px; 
 }
 
 #main {
     padding: 10px;
+}
+button{
+    border-radius: 10%;
+    padding: 20%;
+    margin: 2%;
+}
+
+#top a{
+    padding: 5%;
+    text-align: center;
+    font-size: large;
+    text-decoration-line: none;
+    text-decoration: none;
+    color: tomato;
+    border: 2px solid turquoise;
+    border-style: dashed;
+}
+#bottom {
+    display: flex;
+    justify-content: center;
+}
+#bottom button{
+    padding: 1%;
+    background-color: black;
+    box-shadow: turquoise 0px 0px 0px 3px; 
+}
+.card-text{
+    font-size: 1.5rem;
 }
