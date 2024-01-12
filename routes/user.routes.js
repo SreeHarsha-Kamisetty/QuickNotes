@@ -4,7 +4,61 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const UserRouter = express.Router();
 require('dotenv').config()
+const swaggerUI = require("swagger-ui-express");
 
+
+
+/**
+ * @swagger
+ * /users/register:
+ *   post:
+ *      summary: Register a new user 
+ *      tags: [Users]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          username:
+ *                              type: string
+ *                              description: Name of the user
+ *                          email:
+ *                              type: string
+ *                              description: Email of the user
+ *                          password:
+ *                              type: string
+ *                              description: Password of the user
+ *      responses:
+ *          200: 
+ *              description: Message about successful registration and the user details
+ *              content: 
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                      message: 
+ *                                              type: string
+ *                                              description: Message about the registration status
+ *                                      Details:
+ *                                              type: string
+ *                                              description: Details of the user
+ *                                              content: 
+ *                                                      application/json:
+ *                                                          schema:
+ *                                                              type: object
+ *                                                              properties:
+ *                                                                      email:
+ *                                                                            type: string
+ *                                                                            description: Email of the registered user 
+ *                                                                      username:
+ *                                                                               type: string
+ *                                                                               description: Username of the registered user
+ *                                                                      password:
+ *                                                                                type: string
+ *                                                                                description: Hashed password of the user
+ */
 UserRouter.post("/register",(req,res)=>{
 
     let payload = req.body;
@@ -22,6 +76,63 @@ UserRouter.post("/register",(req,res)=>{
 
 })
 
+
+/**
+ * @swagger
+ * /users/login:
+ *   post:
+ *       summary: For user login with registered email and password
+ *       tags: [Users]
+ *       requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          email:
+ *                              type: string
+ *                              description: Registered Email of the user
+ *                          password:
+ *                              type: string
+ *                              description: Password
+ *       responses:
+ *          200:
+ *              description: login successful
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties: 
+ *                              Message:
+ *                                  type: string
+ *                                  description: Message 
+ *                              token:
+ *                                  type: string
+ *                                  description: Token for the logged in user
+ *                              user:
+ *                                      type: object
+ *                                      properties:
+ *                                          email:
+ *                                              type: string
+ *                                              description: Email of the logged in user
+ *                                          username:
+ *                                              type: string
+ *                                              description: Username of the logged in user
+ *                                          password:
+ *                                               type: string
+ *                                               description: hashed password
+ *          400:
+ *              description: Bad request
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties: 
+ *                              Message:
+ *                                  type: string
+ *                                  description: Error Message        
+ */
 
 UserRouter.post("/login",async (req,res)=>{
     try {
