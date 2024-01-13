@@ -5,7 +5,26 @@ const jwt = require("jsonwebtoken");
 const UserRouter = express.Router();
 require('dotenv').config()
 const swaggerUI = require("swagger-ui-express");
-
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *          User:
+ *              type: object
+ *              properties:
+ *                  id:
+ *                      type: string
+ *                      description: Auto generated id of the user
+ *                  email:
+ *                      type: string
+ *                      description: Email of the user
+ *                  username:
+ *                      type: string
+ *                      description: Username 
+ *                  password:
+ *                      type: string
+ *                      description: Password
+ */
 
 
 /**
