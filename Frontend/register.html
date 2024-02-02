@@ -8,6 +8,16 @@
     <!-- <link rel="stylesheet" href="login.css.css"> -->
 </head>
 <body>
+    <nav>
+        <div id="top">
+            <a href="./index.html">Home</a>
+        
+        
+        
+            <a href="./login.html"id="login">Login</a>
+           
+        </div>
+    </nav>
     
     <div id="main">
         <h1>Register Here </h1>
@@ -27,7 +37,7 @@
     let email = document.getElementById("email");
     let password = document.getElementById("password");
     let signup = document.getElementById("signup");
-
+    let status_msg = document.getElementById("status")
 
     signup.addEventListener('click',async()=>{
         let payload={
