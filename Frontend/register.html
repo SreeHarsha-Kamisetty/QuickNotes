@@ -18,6 +18,8 @@
         <h2>Password</h2>
         <input type="password" id="password" placeholder="Enter your Password">
         <button id="signup">Sign up</button>
+        <div id="status"></div>
+        <p>Already have an account? <a href="./login.html">Login</a></p>
     </div>
 </body>
 <script>
@@ -44,8 +46,12 @@
             })
             if(res.status ==200){
                 let data = await res.json();
+                status_msg.setAttribute("style","color:green")
+                status_msg.innerText = "Registered Successfully . Redirecting to Login......."
                 console.log(data);
-                window.location.href ="./login.html"
+                setTimeout(()=>{
+                    window.location.href ="./login.html"
+                },3000)
             }
             
         } catch (error) {
