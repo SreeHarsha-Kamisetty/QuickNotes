@@ -18,9 +18,9 @@ This GitHub repository hosts a mini project - a Notes App designed to empower us
 - **Data Storage:** MongoDB serves as the database, providing a scalable and flexible solution for storing and retrieving user-generated notes.
 
 **Hosted on Netlify**
-- Deployed link - <a href="https://main--quicknotes-sreeharsha.netlify.app/">Live Demo</a>
+- Deployed link - <a href="https://main--quicknotes-sreeharsha.netlify.app/" target="_blank">Live Demo</a>
 
 **Swagger docs for backed**
--Docs - <a href="https://notesapi-jpgf.onrender.com/apidocs/">Docs</a>
+-Docs - <a href="https://notesapi-jpgf.onrender.com/apidocs/" target="_blank">Docs</a>
 
 
