@@ -6,7 +6,7 @@ This GitHub repository hosts a mini project - a Notes App designed to empower us
 - **Create, Edit, and Delete Notes:** The app allows users to effortlessly create, edit, and delete their notes, providing a versatile platform for managing information.
 
 **Tech Stack:**
-- **Frontend:** HTML, CSS, JavaScript
+- **Frontend:** HTML, CSS, JavaScript,Bootstrap
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 
@@ -22,5 +22,9 @@ This GitHub repository hosts a mini project - a Notes App designed to empower us
 
 **Swagger docs for backed**
 -Docs - <a href="https://notesapi-jpgf.onrender.com/apidocs/" target="blank">Docs</a>
+
+**Screenshots**
+-Home Page
+![image](https://github.com/SreeHarsha-Kamisetty/QuickNotes/assets/146928943/bbfc94e9-97d8-43fb-a8aa-e46012a81b12)
 
 
